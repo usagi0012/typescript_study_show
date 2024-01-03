@@ -1,6 +1,7 @@
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn, CreateDateColumn, DeleteDateColumn, UpdateDateColumn} from 'typeorm';
 
 import { Role } from '../types/userRole.type';
+import { Ticket } from '../../ticket/entities/ticket.entity';
 
 @Index('email', ['email'], { unique: true })
 @Entity({
@@ -37,4 +38,7 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.user)
+  tickets: Ticket[];
 }

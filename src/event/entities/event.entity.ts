@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp, CreateDat
 
 
 import { Category } from '../types/eventcategory.type';
+import { Ticket } from '../../ticket/entities/ticket.entity';
 
 @Entity({
   name: 'events',
@@ -48,4 +49,7 @@ export class Event {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @OneToMany(() => Ticket, (ticket) => ticket.event)
+  tickets: Ticket[];
 }
